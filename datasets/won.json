@@ -1,0 +1,37 @@
+[
+  {
+    "NAME":"Donald Trump",
+    "DELEGATES_WON":484,
+    "NUMBER":"1",
+    "PERCENTAGE":0.24,
+    "POLITICAL_AFFILIATION":"Republican"
+  },
+  {
+    "NAME":"Ted Cruz",
+    "DELEGATES_WON":300,
+    "NUMBER":"2",
+    "PERCENTAGE":0.189,
+    "POLITICAL_AFFILIATION":"Republican"
+  },
+  {
+    "NAME":"Marco Rubio",
+    "DELEGATES_WON":151,
+    "NUMBER":"3",
+    "PERCENTAGE":0.095,
+    "POLITICAL_AFFILIATION":"Republican"
+  },
+    {
+    "NAME":"Hillary Clinton",
+    "DELEGATES_WON":1130,
+    "NUMBER":"4",
+    "PERCENTAGE":0.362,
+    "POLITICAL_AFFILIATION":"Democrat"
+  },
+  {
+    "NAME":"Bernie Sanders",
+    "DELEGATES_WON":499,
+    "NUMBER":"5",
+    "PERCENTAGE":0.16,
+    "POLITICAL_AFFILIATION":"Democrat"
+  }
+  ]

@@ -1,0 +1,331 @@
+[
+  {
+    "NAME":"Donald Trump",
+    "READABILITY":4.5,
+    "START_YEAR":2015,
+    "END_YEAR":2015,
+    "POLITICAL_AFFILIATION":"Republican"
+  },
+  {
+    "NAME":"Hillary Clinton",
+    "READABILITY":7.7,
+    "START_YEAR":2015,
+    "END_YEAR":2016,
+    "POLITICAL_AFFILIATION":"Democrat"
+  },
+  {
+    "NAME":"Bernie Sanders",
+    "READABILITY":9.8,
+    "START_YEAR":2015,
+    "END_YEAR":2015,
+    "POLITICAL_AFFILIATION":"Democrat"
+  },
+  {
+    "NAME":"Ted Cruz",
+    "READABILITY":9.5,
+    "START_YEAR":2016,
+    "END_YEAR":2016,
+    "POLITICAL_AFFILIATION":"Republican"
+  },
+  {
+    "NAME":"Marco Rubio",
+    "READABILITY":9.4,
+    "START_YEAR":2016,
+    "END_YEAR":2016,
+    "POLITICAL_AFFILIATION":"Republican"
+  },
+  {
+    "NAME":"Barrack Obama",
+    "READABILITY":9,
+    "START_YEAR":2009,
+    "END_YEAR":2015,
+    "POLITICAL_AFFILIATION":"Democrat"
+  },
+  {
+    "NAME":"George H. W. Bush",
+    "READABILITY":8.6,
+    "START_YEAR":1989,
+    "END_YEAR":1992,
+    "POLITICAL_AFFILIATION":"Republican"
+  },
+  {
+    "NAME":"William J. Clinton",
+    "READABILITY":9.8,
+    "START_YEAR":1993,
+    "END_YEAR":2000,
+    "POLITICAL_AFFILIATION":"Democrat"
+  },
+  {
+    "NAME":"Lyndon B. Johnson",
+    "READABILITY":10,
+    "START_YEAR":1964,
+    "END_YEAR":1969,
+    "POLITICAL_AFFILIATION":"Democrat"
+  },
+  {
+    "NAME":"George W. Bush",
+    "READABILITY":10,
+    "START_YEAR":2001,
+    "END_YEAR":2008,
+    "POLITICAL_AFFILIATION":"Republican"
+  },
+  {
+    "NAME":"Ronald Reagan",
+    "READABILITY":10.4,
+    "START_YEAR":1982,
+    "END_YEAR":1988,
+    "POLITICAL_AFFILIATION":"Republican"
+  },
+  {
+    "NAME":"Harry S. Truman",
+    "READABILITY":10.9,
+    "START_YEAR":1946,
+    "END_YEAR":1953,
+    "POLITICAL_AFFILIATION":"Democrat"
+  },
+  {
+    "NAME":"Gerald R. Ford",
+    "READABILITY":11.2,
+    "START_YEAR":1975,
+    "END_YEAR":1977,
+    "POLITICAL_AFFILIATION":"Republican"
+  },
+  {
+    "NAME":"John F. Kennedy",
+    "READABILITY":12.3,
+    "START_YEAR":1961,
+    "END_YEAR":1963,
+    "POLITICAL_AFFILIATION":"Democrat"
+  },
+  {
+    "NAME":"Calvin Coolidge",
+    "READABILITY":12.1,
+    "START_YEAR":1923,
+    "END_YEAR":1928,
+    "POLITICAL_AFFILIATION":"Republican"
+  },
+  {
+    "NAME":"Richard Nixon",
+    "READABILITY":11.8,
+    "START_YEAR":1970,
+    "END_YEAR":1974,
+    "POLITICAL_AFFILIATION":"Republican"
+  },
+  {
+    "NAME":"Jimmy Carter",
+    "READABILITY":11.6,
+    "START_YEAR":1978,
+    "END_YEAR":1981,
+    "POLITICAL_AFFILIATION":"Democrat"
+  },
+  {
+    "NAME":"Franklin D. Roosevelt",
+    "READABILITY":12.4,
+    "START_YEAR":1934,
+    "END_YEAR":1945,
+    "POLITICAL_AFFILIATION":"Democrat"
+  },
+  {
+    "NAME":"Dwight D. Eisenhower",
+    "READABILITY":12.6,
+    "START_YEAR":1953,
+    "END_YEAR":1961,
+    "POLITICAL_AFFILIATION":"Republican"
+  },
+  {
+    "NAME":"Herbert Hoover",
+    "READABILITY":13.2,
+    "START_YEAR":1929,
+    "END_YEAR":1932,
+    "POLITICAL_AFFILIATION":"Republican"
+  },
+  {
+    "NAME":"Chester A. Arthur",
+    "READABILITY":13.8,
+    "START_YEAR":1881,
+    "END_YEAR":1884,
+    "POLITICAL_AFFILIATION":"Republican"
+  },
+  {
+    "NAME":"Warren Harding",
+    "READABILITY":14.5,
+    "START_YEAR":1921,
+    "END_YEAR":1922,
+    "POLITICAL_AFFILIATION":"Republican"
+  },
+  {
+    "NAME":"Abraham Lincoln",
+    "READABILITY":14.6,
+    "START_YEAR":1861,
+    "END_YEAR":1864,
+    "POLITICAL_AFFILIATION":"Republican"
+  },
+  {
+    "NAME":"Theodore Roosevelt",
+    "READABILITY":15.5,
+    "START_YEAR":1901,
+    "END_YEAR":1908,
+    "POLITICAL_AFFILIATION":"Republican"
+  },
+  {
+    "NAME":"Woodrow Wilson",
+    "READABILITY":15.6,
+    "START_YEAR":1913,
+    "END_YEAR":1920,
+    "POLITICAL_AFFILIATION":"Democrat"
+  },
+  {
+    "NAME":"Benjamin Harrison",
+    "READABILITY":15.9,
+    "START_YEAR":1889,
+    "END_YEAR":1892,
+    "POLITICAL_AFFILIATION":"Republican"
+  },
+  {
+    "NAME":"James Buchanan",
+    "READABILITY":15.9,
+    "START_YEAR":1857,
+    "END_YEAR":1860,
+    "POLITICAL_AFFILIATION":"Democrat"
+  },
+  {
+    "NAME":"Ulysses S. Grant",
+    "READABILITY":16.6,
+    "START_YEAR":1869,
+    "END_YEAR":1876,
+    "POLITICAL_AFFILIATION":"Republican"
+  },
+  {
+    "NAME":"William McKinley",
+    "READABILITY":16.9,
+    "START_YEAR":1897,
+    "END_YEAR":1900,
+    "POLITICAL_AFFILIATION":"Republican"
+  },
+  {
+    "NAME":"Andrew Johnson",
+    "READABILITY":16.9,
+    "START_YEAR":1865,
+    "END_YEAR":1868,
+    "POLITICAL_AFFILIATION":"Democrat"
+  },
+  {
+    "NAME":"William H. Taft",
+    "READABILITY":17.3,
+    "START_YEAR":1909,
+    "END_YEAR":1912,
+    "POLITICAL_AFFILIATION":"Republican"
+  },
+  {
+    "NAME":"James Polk",
+    "READABILITY":17.7,
+    "START_YEAR":1845,
+    "END_YEAR":1848,
+    "POLITICAL_AFFILIATION":"Democrat"
+  },
+  {
+    "NAME":"Millard Fillmore",
+    "READABILITY":17.7,
+    "START_YEAR":1850,
+    "END_YEAR":1852,
+    "POLITICAL_AFFILIATION":"Whig"
+  },
+  {
+    "NAME":"Rutherford B. Hayes",
+    "READABILITY":17.8,
+    "START_YEAR":1877,
+    "END_YEAR":1880,
+    "POLITICAL_AFFILIATION":"Republican"
+  },
+  {
+    "NAME":"George Washington",
+    "READABILITY":17.9,
+    "START_YEAR":1790,
+    "END_YEAR":1796,
+    "POLITICAL_AFFILIATION":"Non-affiliated"
+  },
+  {
+    "NAME":"James Monroe",
+    "READABILITY":17.9,
+    "START_YEAR":1817,
+    "END_YEAR":1824,
+    "POLITICAL_AFFILIATION":"Republican"
+  },
+  {
+    "NAME":"John Adams",
+    "READABILITY":18.2,
+    "START_YEAR":1797,
+    "END_YEAR":1800,
+    "POLITICAL_AFFILIATION":"Federalist"
+  },
+  {
+    "NAME":"Grover Cleveland",
+    "READABILITY":18.3,
+    "START_YEAR":1885,
+    "END_YEAR":1888,
+    "POLITICAL_AFFILIATION":"Democrat"
+  },
+  {
+    "NAME":"Grover Cleveland",
+    "READABILITY":18.3,
+    "START_YEAR":1893,
+    "END_YEAR":1896,
+    "POLITICAL_AFFILIATION":"Democrat"
+  },
+  {
+    "NAME":"Zachary Taylor",
+    "READABILITY":18.3,
+    "START_YEAR":1849,
+    "END_YEAR":1850,
+    "POLITICAL_AFFILIATION":"Whig"
+  },
+  {
+    "NAME":"Thomas Jefferson",
+    "READABILITY":18.5,
+    "START_YEAR":1801,
+    "END_YEAR":1808,
+    "POLITICAL_AFFILIATION":"Democratic-Republican"
+  },
+  {
+    "NAME":"John Tyler",
+    "READABILITY":19.1,
+    "START_YEAR":1841,
+    "END_YEAR":1844,
+    "POLITICAL_AFFILIATION":"Whig"
+  },
+  {
+    "NAME":"Andrew Jackson",
+    "READABILITY":19.7,
+    "START_YEAR":1829,
+    "END_YEAR":1836,
+    "POLITICAL_AFFILIATION":"Democrat"
+  },
+  {
+    "NAME":"John Quincy Adams",
+    "READABILITY":19.9,
+    "START_YEAR":1825,
+    "END_YEAR":1828,
+    "POLITICAL_AFFILIATION":"Democratic-Republican"
+  },
+  {
+    "NAME":"Franklin Pierce",
+    "READABILITY":20,
+    "START_YEAR":1853,
+    "END_YEAR":1856,
+    "POLITICAL_AFFILIATION":"Democrat"
+  },
+  {
+    "NAME":"Martin Van Buren",
+    "READABILITY":20.7,
+    "START_YEAR":1837,
+    "END_YEAR":1840,
+    "POLITICAL_AFFILIATION":"Democrat"
+  },
+  {
+    "NAME":"James Madison",
+    "READABILITY":21.6,
+    "START_YEAR":1809,
+    "END_YEAR":1816,
+    "POLITICAL_AFFILIATION":"Democratic-Republican"
+  }
+]

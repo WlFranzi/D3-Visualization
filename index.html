@@ -1,0 +1,595 @@
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>What is Trump's trump?</title>
+	<link href='https://fonts.googleapis.com/css?family=Lora' rel='stylesheet' type='text/css'>
+	<link rel="stylesheet" href="style/Grid.css" type='text/css'>
+	<link rel="stylesheet" href="style/style.css" type='text/css'>
+	<script src="http://d3js.org/d3.v3.min.js"></script>
+	<script src="http://d3js.org/topojson.v1.min.js"></script>
+	<script type="text/javascript" src="js/d3.layout.cloud.js"></script>
+	
+</head>
+<body>
+	<div class="container">
+		<!--Landpage Header  -->
+		<section class="row">
+			<div id="landpage" class="col-12">
+				<h1 id="title">What is Trump's trump?</h1>
+			</div>
+		</section>
+		<!-- Graph 1 and 2-->
+		<section class="row">
+			<div id="plot1" class="col-5 col-offset-1">
+				<h2><strong>Despite no prior political experiences, Trump almost pulls even with Hilary in terms of party popularity...</strong></h2>
+				<svg id="graph1" height="350" width="400"></svg>	
+				<div class="row">
+					<div class="col-8 col-offset-2">
+						<img src="img/table1.png" alt="">
+						<p>This chart shows the most recent result of the presidential primaries (March 8th 2016). The histogram visualizes the percentage of delegates won by each candidate in respect to total available delegates by party.</p>
+					</div>
+				</div>
+			</div>
+			<div id="word-cloud" class="col-5">
+				<h2><strong>...whilst using words completely unlike a presidential candidate</strong></h2>
+				<svg id="graph3" height="450" width="450"></svg>
+				<div class="row">
+					<div class="col-6 col-offset-3">Source:<a href="
+						http://nymag.com/daily/intelligencer/2015/08/donalds-dictionary.html"> nymag.com</a></div>
+				</div>		
+			</div>
+		</section>
+		<!-- Graph 3 -->
+		<section class="row">
+			<div id="plot2" class="col-12">
+				<h2><strong>Catering to the lowest common denominator </strong></h2>
+				<h3>Since George Washington, presidents address voters on a decreasing grade level - Trump leads the downfall</h3>
+				<svg id ="graph2" height="500" width="1600"></svg>
+				<div class="row">
+					<div class="col-8 col-offset-2">
+						<p>The Flesch–Kincaid test is a readability test used to indicate how difficult a reading passage in English is to understand.
+									The above plot shows all presidents and the average Flesch–Kincaid grade level of their speeches. Their face sizes correlate with individual presidential tenures. Additionally, we show the average Flesch–Kincaid grade level of the most popular candidates running for presidency in 2016.</p>
+					</div>
+				</div>
+			</div>
+		</section>
+		<!-- Graph 4 and 5 -->
+		<section class="row">
+			<div id="plot3"  class="col-6">
+				<h2><strong>Overall education level of voters drops...</strong></h2>
+				<svg id="graph6" height="420" width="620"></svg>
+				<div class="row">
+					<div class="col-8 col-offset-2">
+						<p>The following data is from the U.S. Census Bureau. It shows the education attainment of voters during presidential elections 1964 onwards.</p>
+					</div>
+				</div>	
+			</div>		
+			<div id="map" class="col-6">
+				<h2><strong>...Leading to increased support for Trump on a nation-wide scale</strong></h2>
+				<svg id="graph4" height="420" width="620"></svg>
+				<svg id="graph5" height="420" width="620"></svg>
+				<div class="row">
+					<div class="col-8 col-offset-2">
+						<p class="margin-top-0">The top map is based on analysis of the U.S. Census Bureau’s Survey in 2009 on Education Attainment per State. It shows the percentage of population that holds a Bachelor’s degree or higher.<br/> 
+									Bottom map outlines the percentage of republicans supporting Trump by each U.S. State</p>
+					</div>
+				</div>	
+			</div>
+		</section>
+	</div>
+</body>
+<script>
+// graph 1
+(function(){
+	var svg = d3.select("#graph1");
+	var height = svg.attr("height");
+	var width = svg.attr("width");
+	var name = ["Trump", "Cruz", "Rubio", "Clinton", "Sanders"];
+	var padding = 60;
+	var xScale = d3.scale.linear().domain([0.5, 6]).range([padding, width-padding]);
+	var yScale = d3.scale.linear().domain([0, 0.4]).range([height - padding, padding]);
+	var colorScale=d3.scale.ordinal(["Republican","Democrat"]).range(["#F7524C","#81CFFB"]);
+	var xAxis = d3.svg.axis().scale(xScale).orient("bottom").ticks(0).outerTickSize(0);
+	var yAxis = d3.svg.axis().scale(yScale).orient("left").ticks(5).outerTickSize(0).tickFormat(d3.format(".0%"));
+	svg.append("g").attr("transform", "translate(0," + (height - padding) + ")").attr("class", "axis").call(xAxis)
+	svg.append("g").attr("transform", "translate(" + padding + ",0)").attr("class", "axis").call(yAxis);
+
+	d3.json("datasets/won.json", function(error, data) {
+
+		data.forEach(function(d){
+			svg.append("rect")
+			.attr("x", xScale(d.NUMBER))
+			.attr("y", yScale(d.PERCENTAGE))
+			.attr("width", 50)
+			.attr("fill", colorScale(d.POLITICAL_AFFILIATION))
+			.attr("height", yScale(0) - yScale(d.PERCENTAGE));  
+
+			svg.append("image")
+			.attr('xlink:href',"img/"+d.NAME+".png")
+			.attr("x",xScale(d.NUMBER))
+			.attr("y",-75 + yScale(d.PERCENTAGE))
+			.attr("width", 46)
+			.attr("height", 64); 
+
+			svg.append("text")
+			.attr("x",25 + xScale(d.NUMBER))
+			.attr("y", -5 + yScale(d.PERCENTAGE))
+			.attr("width", 46)
+			.attr("height", 20)
+			.attr("text-anchor", "middle")  
+			.style("font-size", "12px")
+			.text(spliceName(d.NAME)); 
+
+			// add laels
+			svg.append("text").text("Candidates").attr("x",(width-padding)/2).attr("y",height-20)
+			.attr("font-size","20px").attr('text-anchor','middle');
+
+			svg.append("text")
+			.attr("transform", "translate("+-10+","+height/2+")")
+			.style("text-anchor", "middle")
+			.style("writing-mode","tb")
+			.attr("font-size","20px")
+			.text("Delegates won");
+		});
+	});
+
+}());
+
+// graph 2
+(function(){
+	var colorGreen ="#0EDAA9";
+	var colorRed = "#F76661";
+
+	var svg = d3.select("#graph2");
+	var height = svg.attr("height");
+	var width = svg.attr("width");
+	var width2 = 300;
+	var padding = 50;
+	var xScale = d3.scale.linear().domain([1790, 2015]).range([padding, width-padding-width2]);
+	var yScale = d3.scale.linear().domain([0, 22]).range([height - padding, padding]);
+	var xAxis = d3.svg.axis().scale(xScale).orient("bottom").ticks(5);
+	var yAxis = d3.svg.axis().scale(yScale).orient("left");
+	var colorArray = ["#F7524C","#81CFFB","#A7F272","#C2ACF3","#F78A83","#FEF161"];
+	var partiesArray = ["Republican","Democrat","Whig","Democratic-Republican","Federalist","Non-affiliated"];
+	function colorScale(x) {
+		return colorArray[partiesArray.indexOf(x)];
+	}
+	svg.append("g").attr("transform", "translate(0," + (height - padding) + ")").attr("class", "axis").attr("stroke","#979797")
+	.call(xAxis);
+	svg.append("g").attr("transform", "translate(" + padding + ",0)").attr("class", "axis").attr("stroke","#979797")
+	.call(yAxis);
+
+		// Extend the axises
+		svg.append("g").append("line")
+		.attr('x1',width-padding-width2)
+		.attr('y1',height-padding)
+		.attr('x2',width-padding)
+		.attr('y2',height-padding)
+		.attr('stroke-width',1)
+		.attr('stroke','#979797');
+
+		svg.append("g").append("line")
+		.attr('x1',width-padding-width2)
+		.attr('y1',height)
+		.attr('x2',width-padding-width2)
+		.attr('y2',padding)
+		.style("stroke-dasharray", ("3, 3")) 
+		.attr('stroke-width',3)
+		.attr('stroke',colorGreen);
+
+		svg.append("g").append("text")
+		.attr('x',width-190)
+		.attr('y',yScale(17))
+		.text('2016')
+		.attr("text-anchor","middle")
+		.attr("font-size","2em")
+		.attr("fill",colorGreen)
+		.attr("font-weight","bold");
+
+
+// Read Json file and draw the plot with presidents' images
+d3.json("datasets/president.json", function(error, data) {
+	if(error){
+		console.log(error);
+	}
+	var maxTenure=0;
+	maxTenure = d3.max(data, function(d) { return d.END_YEAR-d.START_YEAR;} );
+	data.forEach(function(d){
+		if(d.START_YEAR<2015){
+			svg.append("ellipse")
+			.attr("cx", xScale( d.START_YEAR)+(46*(d.END_YEAR-d.START_YEAR)/maxTenure+5)/2)
+			.attr("cy", yScale(d.READABILITY)+(64*(d.END_YEAR-d.START_YEAR)/maxTenure+5)/2)
+			.attr('stroke', colorScale(d.POLITICAL_AFFILIATION))
+			.attr("rx", (46*(d.END_YEAR-d.START_YEAR)/maxTenure+5)/2)
+			.attr("ry", (64*(d.END_YEAR-d.START_YEAR)/maxTenure+5)/2)
+			.attr("fill", colorScale(d.POLITICAL_AFFILIATION));
+
+			svg.append("image")
+			.attr('xlink:href',"img/"+d.NAME+".png")
+			.attr("x",xScale(d.START_YEAR))
+			.attr("y",yScale(d.READABILITY))
+			.attr("width",46*(d.END_YEAR-d.START_YEAR)/maxTenure+5)
+			.attr("height",64*(d.END_YEAR-d.START_YEAR)/maxTenure+5);
+
+			svg.append("text")
+			.attr("x",xScale( d.START_YEAR)+(46*(d.END_YEAR-d.START_YEAR)/maxTenure+5)/2)
+			.attr("y",yScale(d.READABILITY)+64*(d.END_YEAR-d.START_YEAR)/maxTenure+15)
+			.text(spliceName(d.NAME))
+			.attr('font-size',10)
+			.attr('text-anchor','middle');  
+		}
+		else{
+			svg.append("ellipse")
+			.attr("cx", function(){
+				var index = data.indexOf(d);
+				return width-padding-width2+index*50+40;
+			})
+			.attr("cy", yScale(d.READABILITY)+32*(d.END_YEAR-d.START_YEAR)/maxTenure+3)
+			.attr('stroke', colorScale(d.POLITICAL_AFFILIATION))
+			.attr("rx", 24)
+			.attr("ry", 33)
+			.attr("fill", colorScale(d.POLITICAL_AFFILIATION));
+
+			svg.append("image")
+			.attr('xlink:href',"img/"+d.NAME+".png")
+			.attr("x",function(){
+				var index = data.indexOf(d);
+				return width-padding-width2+index*50+40-23;
+			})
+			.attr("y",yScale(d.READABILITY)-32)
+			.attr("width",46)
+			.attr("height",64);
+
+			svg.append("text")
+			.attr("x",function(){
+				var index = data.indexOf(d);
+				return width-padding-width2+index*50+40;
+			})
+			.attr("y",yScale(d.READABILITY)-32)
+			.text(spliceName(d.NAME))
+			.attr('text-anchor','middle');
+
+
+			svg.append("text")
+			.attr("x",function(){
+				var index = data.indexOf(d);
+				return width-padding-width2+index*50+40;
+			})
+			.attr("y",yScale(d.READABILITY)-52)
+			.text(d.READABILITY)
+			.attr('fill',colorRed)
+			.attr('text-anchor','middle');  
+
+			// add labels for axises 
+			svg.append("text").text("US presidency").attr("x",(width-width2-padding)/2).attr("y",height-5)
+			.attr("font-size","20px").attr('text-anchor','middle');
+
+			svg.append("text")
+			.attr("transform", "translate("+10+","+height/2+")")
+			.style("text-anchor", "middle")
+			.style("writing-mode","tb")
+			.attr("font-size","20px")
+			.text("Grade Level");
+
+		    // add indicators for parties
+		    svg.append("circle").attr("cx",xScale(1795))
+		    .attr("cy",yScale(4))
+		    .attr("r","5").attr("fill","#FEF161");
+
+		    svg.append("text").attr("x",xScale(1800)).attr("y",yScale(3.8))
+		    .attr("r","5").text("Non-affiliated").attr('fill','#979797');
+
+		    svg.append("circle").attr("cx",xScale(1795)).attr("cy",yScale(6))
+		    .attr("r","5").attr("fill","#F7524C");
+
+		    svg.append("text").attr("x",xScale(1800)).attr("y",yScale(5.8))
+		    .attr("r","5").text("Republican").attr('fill','#979797');
+
+		    svg.append("circle").attr("cx",xScale(1795)).attr("cy",yScale(5))
+		    .attr("r","5").attr("fill","#51B5E4");
+
+		    svg.append("text").attr("x",xScale(1800)).attr("y",yScale(4.8))
+		    .attr("r","5").text("Democrat").attr('fill','#979797');
+
+		    svg.append("circle").attr("cx",xScale(1795)).attr("cy",yScale(3))
+		    .attr("r","5").attr("fill","#A7F272");
+
+		    svg.append("text").attr("x",xScale(1800)).attr("y",yScale(2.8))
+		    .attr("r","5").text("Whig").attr('fill','#979797');
+
+		    svg.append("circle").attr("cx",xScale(1795))
+		    .attr("cy",yScale(2))
+		    .attr("r","5").attr("fill","#C2ACF3");
+
+		    svg.append("text").attr("x",xScale(1800)).attr("y",yScale(1.8))
+		    .attr("r","5").text("Democratic-Republican").attr('fill','#979797');
+
+		    svg.append("circle").attr("cx",xScale(1795))
+		    .attr("cy",yScale(1))
+		    .attr("r","5").attr("fill","#F78A83");
+
+		    svg.append("text").attr("x",xScale(1800)).attr("y",yScale(0.8))
+		    .attr("r","5").text("Federalist").attr('fill','#979797');
+		    // 
+		    svg.append("ellipse").attr("cx",xScale(1840))
+		    .attr("cy",yScale(5))
+		    .attr("rx",4.6).attr("ry",6.7).attr("fill","#DADADA");
+
+		    svg.append("text").attr("x",xScale(1843)).attr("y",yScale(4.9))
+		    .attr("r","5").text("One year presidential tenure").attr('fill','#979797').attr('alignment-baseline','middle');
+
+		    svg.append("ellipse").attr("cx",xScale(1840))
+		    .attr("cy",yScale(3))
+		    .attr("rx",9.2).attr("ry",13.4).attr("fill","#DADADA");
+
+		    svg.append("text").attr("x",xScale(1843)).attr("y",yScale(2.9))
+		    .attr("r","5").text("Two year presidential tenure").attr('fill','#979797').attr('alignment-baseline','middle');
+		}
+	});
+});
+}());
+
+// graph 3 and 4
+(function(){
+
+	var width = 620,
+	height = 420;
+
+	var projection = d3.geo.albersUsa();
+
+	var path = d3.geo.path().projection(projection);
+	
+	var svg = d3.select("#graph4")
+	.attr("width", width)
+	.attr("height", height);
+	var svg2 = d3.select("#graph5")
+	.attr("width", width)
+	.attr("height", height);
+	var  states;
+
+	var populationScale = d3.scale.linear().domain([-5, 0, 5]).range(["#d8b365", "#f5f5f5", "#5ab4ac"]);
+	var eduScale = d3.scale.linear().domain([17.3,48.5]).range([0.18, 0.5]);
+	var trumpScale= d3.scale.linear().domain([0.18,0.5]).range(["#F7ECDE", "#F00"]);
+	var colorScale = d3.scale.linear().domain([0.06,0.43]).range(["#F00", "#F7ECDE"]);	
+
+
+	d3.json("datasets/states.json", function(error, shapes) {
+
+		states = topojson.feature(shapes, shapes.objects.states).features;
+
+		var geometries = shapes.objects.states.geometries;
+		var edus=[];
+		var names=[];
+		var geoLength = geometries.length;
+		for(var i=0;i<geoLength;i++){
+			names.push(geometries[i].properties.STUSPS10);
+			edus.push(parseFloat(geometries[i].properties.EDU));
+		}
+
+		var statePaths = svg.append("g");
+		statePaths.selectAll("path").data(states).enter()
+		.append("path").attr("d", path).attr('class','remove')
+		.style("fill", function(d){	
+			var temp = eduScale(d.properties.EDU)
+			return colorScale(temp);
+		})
+		.style("stroke", "#ccc")
+		.attr("transform","scale(0.7)");;
+		var title1 = svg.append("g");
+		statePaths.append("text")
+		.attr('width','20')
+		.attr('height','20')
+		.attr('x',width/2+30)
+		.attr('y',15)
+		.text("Education level in each state")
+		.attr('fill','#333')
+		.attr('text-anchor',"middle");
+
+		statePaths.append("text")
+		.attr('x',width/2-60)
+		.attr('y',395)
+		.text("high education level")
+		.attr('text-anchor','end')
+		.attr('fill','#979797');
+
+		statePaths.append("text")
+		.attr('x',width/2+60)
+		.attr('y',395)
+		.text("low education level")
+		.attr('text-anchor','start')
+		.attr('fill','#979797');
+
+		statePaths.append("rect")
+		.attr('x',width/2-50)
+		.attr('y',380)
+		.attr('width',50)
+		.attr('height',20)
+		.attr('fill','#F7ECDE');
+
+		statePaths.append("rect")
+		.attr('x',width/2)
+		.attr('y',380)
+		.attr('width',50)
+		.attr('height',20)
+		.attr('fill','#F00');
+
+
+		var statePaths2 = svg2.append("g");
+		statePaths2.selectAll("path").data(states).enter()
+		.append("path").attr("d", path)
+		.style("fill", function(d){
+			return trumpScale(d.properties.Republic_Trump);
+		})
+		.style("stroke", "#ccc")
+		.attr("transform","scale(0.7)");
+		statePaths2.append("text")
+		.attr('width','20')
+		.attr('height','20')
+		.attr('x',width/2+30)
+		.attr('y',15)
+		.text("Republican support for Trump in each state")
+		.attr('fill','#333')
+		.attr('text-anchor',"middle");
+
+		statePaths2.append("text")
+		.attr('x',width/2-60)
+		.attr('y',395)
+		.text("low support for Trump")
+		.attr('text-anchor','end')
+		.attr('fill','#979797');
+
+		statePaths2.append("text")
+		.attr('x',width/2+60)
+		.attr('y',395)
+		.text("high support for Trump")
+		.attr('text-anchor','start')
+		.attr('fill','#979797');
+
+		statePaths2.append("rect")
+		.attr('x',width/2-50)
+		.attr('y',380)
+		.attr('width',50)
+		.attr('height',20)
+		.attr('fill','#F7ECDE');
+
+		statePaths2.append("rect")
+		.attr('x',width/2)
+		.attr('y',380)
+		.attr('width',50)
+		.attr('height',20)
+		.attr('fill','#F00');
+
+
+	  	// word cloud
+	  	var fill = d3.scale.category20();
+	    //put the words in this array, I tried with senteces but it doesn't look cool...
+	    words1 =["Total loser", "Xenophobia", "Hands", "China", "Mexico Wall", "Wall", "Pussy","F**k","Damn","Shit","Bullshit","Deviant","Illegals","Immigrants","Muslims","ISIS","Moron","Mexicans","Slob","rapists"];
+
+	    d3.layout.cloud().size([450, 450])
+      	  .words(words1.map(function(d) {//change the 'words1' to 'quotes' if you want to try sentences
+      	  	return {text: d, size: 30};
+      	  }))
+      	  .rotate(function() { return (Math.random()*180-90); })
+      	  .font("Impact")
+      	  .fontSize(function(d,i) { 
+      	  	return d.size; 
+      	  })
+      	  .on("end", draw)
+      	  .start();
+
+        // var wourdCloud =d3.select("#graph3");
+        function draw(words) {
+        	d3.select("#graph3").append("g")
+        	.attr("width", 600)
+        	.attr("height", 600)
+        	.append("g")
+        	.attr("transform", "translate(220,220)")
+        	.selectAll("text")
+        	.data(words)
+        	.enter().append("text")
+        	.style("font-size", function(d) { return d.size + "px"; })
+        	.style("font-family", "Impact")
+        	.style("fill", function(d, i) { return fill(i); })
+        	.attr("text-anchor", "middle")
+        	.attr("transform", function(d) {
+        		return "translate(" + [d.x, d.y] + ")rotate(" + d.rotate + ")";
+        	})
+        	.text(function(d) { return d.text; });
+        }
+    });
+
+}());
+// Graph 6
+(function(){
+	var svg = d3.select("#graph6");
+	var height = svg.attr("height");
+	var width = svg.attr("width");
+	var padding = 60;
+	var xScale = d3.scale.linear().domain([1963, 2013]).range([padding, width-padding]);
+	var yScale = d3.scale.linear().domain([0, 100]).range([height - padding, padding]);
+	var xAxis = d3.svg.axis().scale(xScale).orient("bottom").tickValues(d3.range(1964,2016,4)).tickFormat(d3.format(""));
+	var yAxis = d3.svg.axis().scale(yScale).orient("left");
+	svg.append("g").attr("transform", "translate(0," + (height - padding) + ")").attr("class", "axis").call(xAxis)
+	svg.append("g").attr("transform", "translate(" + padding + ",0)").attr("class", "axis").call(yAxis);
+
+	d3.csv("datasets/educationofvoters.csv", function(data) {
+		svg.append("text")
+		.attr("x",27 + xScale(data[0].Year))
+		.attr("y", 10 + yScale(data[0].High_school_graduate))
+		.attr("width", 46)
+		.attr("height", 20)
+		.attr("text-anchor", "end")  
+		.style("font-size", "9px")
+		.text("High school");
+		svg.append("text")
+		.attr("x",27 + xScale(data[0].Year))
+		.attr("y", 10 + yScale(data[0].College_degree))
+		.attr("width", 46)
+		.attr("height", 20)
+		.attr("text-anchor", "end")  
+		.style("font-size", "9px")
+		.text("College");
+		svg.append("text")
+		.attr("x",27 + xScale(data[0].Year))
+		.attr("y", 10 + yScale(data[0].Bachelor_degree))
+		.attr("width", 46)
+		.attr("height", 20)
+		.attr("text-anchor", "end")  
+		.style("font-size", "9px")
+		.text("Bachelor");
+
+	// add labels
+	svg.append("text").text("Years of presidential elections").attr("x",(width-padding)/2).attr("y",height-20)
+	.attr("font-size","20px").attr('text-anchor','middle');
+
+	svg.append("text")
+	.attr("transform", "translate("+20+","+height/2+")")
+	.style("text-anchor", "middle")
+	.style("writing-mode","tb")
+	.attr("font-size","20px")
+	.text("Percentage Voted");   
+
+	var High_school_graduate = d3.svg.line()
+	.x(function (d) { return xScale(d.Year); })
+	.y(function (d) { return yScale(d.High_school_graduate); });
+	svg.append("path").attr("d", High_school_graduate(data))
+	.attr("class", "outline").attr("stroke", "white");
+	svg.append("path").attr("d", High_school_graduate(data))
+	.attr("class", "plot").attr("stroke", "#F7524C");
+
+	var College_degree = d3.svg.line()
+	.x(function (d) { return xScale(d.Year); })
+	.y(function (d) { return yScale(d.College_degree); });
+	svg.append("path").attr("d", College_degree(data))
+	.attr("class", "outline").attr("stroke", "white");
+	svg.append("path").attr("d", College_degree(data))
+	.attr("class", "plot").attr("stroke", "#51B5E4");
+
+	var Bachelor_degree = d3.svg.line()
+	.x(function (d) { return xScale(d.Year); })
+	.y(function (d) { return yScale(d.Bachelor_degree); });
+	svg.append("path").attr("d", Bachelor_degree(data))
+	.attr("class", "outline").attr("stroke", "white");
+	svg.append("path").attr("d", Bachelor_degree(data))
+	.attr("class", "plot").attr("stroke", "#0EDAA9");
+});
+}());
+
+// function to get last name
+function spliceName(name){
+	var temp=[]
+	var length = name.length;
+	var index = name.indexOf(' ');
+	var count = 0;
+	while(index!=-1){
+		count ++;
+		index = name.indexOf(' ',count+1);
+		temp.push(index);
+	}
+	var length2 = temp.length;
+	indexFinal = temp[length2-2];
+	var temp = name.slice(indexFinal,length);
+	return temp;
+}
+</script>
+</html>
