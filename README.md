@@ -1,3 +1,5 @@
-# DataVisualizationFirst
+# Data Visualization with D3/Javascript
 
-# DataViz1
+# What is Trumps Trump?
+
+
